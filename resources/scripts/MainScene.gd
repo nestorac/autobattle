@@ -36,8 +36,8 @@ func _input(event: InputEvent) -> void:
 		var movement = Vector3(event.relative.x, -event.relative.y, 0) * 0.1
 
 		# Rotate the movement vector based on the camera orientation
-		var global_basis = global_transform.basis
-		movement = global_basis.xform(movement)
+#		var global_basis = global_transform.basis
+#		movement = global_basis.xform(movement)
 
 		# Move the object's position based on the movement vector
 		position += movement

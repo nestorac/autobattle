@@ -3,6 +3,7 @@ extends Camera3D
 const RAY_LENGHT = 1000
 
 @onready var warrior = $"../warrior"
+var cube = preload("res://resources/scenes/stop_area.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,10 +17,9 @@ func _process(delta):
 		var ray_result = ray_from_mouse(mouse_position, 9)
 		if (ray_result):
 			if ray_result.collider.is_in_group("Floor"):
-				print ("Mouse position: ", ray_result["position"])
-				warrior.destination = ray_result["position"]
-#				warrior.set_destination(ray_result["position"])
-
+				warrior.is_walking = true
+				warrior.set_destination(ray_result["position"])
+				place_cube(ray_result["position"])
 
 func ray_from_mouse (mouse_position, collision_mask):
 	var ray_start = project_ray_origin(mouse_position)
@@ -28,3 +28,9 @@ func ray_from_mouse (mouse_position, collision_mask):
 	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end)
 	var collision = get_world_3d().direct_space_state.intersect_ray(query)
 	return collision
+
+func place_cube(place: Vector3):
+	var cube_instance = cube.instantiate()
+	add_child(cube_instance)
+	cube_instance.global_position = place
+#	print("Cube instance: ", cube_instance.global_position)
