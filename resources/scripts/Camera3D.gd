@@ -18,7 +18,7 @@ func _process(delta):
 		if (ray_result):
 			if ray_result.collider.is_in_group("Floor"):
 				warrior.is_walking = true
-				warrior.set_destination(ray_result["position"])
+#				warrior.set_destination(ray_result["position"])
 				place_cube(ray_result["position"])
 
 func ray_from_mouse (mouse_position, collision_mask):
@@ -30,7 +30,14 @@ func ray_from_mouse (mouse_position, collision_mask):
 	return collision
 
 func place_cube(place: Vector3):
+	var children = get_children()
+	for child in children:
+		child.queue_free()
+#	print ("Hijos: ", children)
 	var cube_instance = cube.instantiate()
 	add_child(cube_instance)
 	cube_instance.global_position = place
+	warrior.set_destination(place)
+	print ("Where we go: ", place)
 #	print("Cube instance: ", cube_instance.global_position)
+	warrior.is_rotating = true
