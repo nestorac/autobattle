@@ -20,6 +20,7 @@ func _process(delta):
 				warrior.is_walking = true
 #				warrior.set_destination(ray_result["position"])
 				place_cube(ray_result["position"])
+				print ("ray_result: ", ray_result)
 
 func ray_from_mouse (mouse_position, collision_mask):
 	var ray_start = project_ray_origin(mouse_position)
@@ -38,6 +39,7 @@ func place_cube(place: Vector3):
 	add_child(cube_instance)
 	cube_instance.global_position = place
 	warrior.set_destination(place)
-	print ("Where we go: ", place)
+#	print ("Where we go: ", place)
 #	print("Cube instance: ", cube_instance.global_position)
 	warrior.is_rotating = true
+	warrior.timer.start(0.0)
