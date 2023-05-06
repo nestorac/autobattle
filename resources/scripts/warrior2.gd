@@ -9,6 +9,9 @@ var is_rotating = false
 @onready var timer = $Timer as Timer
 @onready var anim = $AnimationPlayer as AnimationPlayer
 
+enum States {IDLE, RUNNING, ROTATING, ATTACKING}
+
+var _state : int = States.IDLE
 
 func set_destination(_destination: Vector3):
 	destination = _destination
@@ -38,6 +41,11 @@ func movement():
 
 
 func _physics_process(delta):
+	match _state:
+		States.IDLE:
+			pass
+		States.RUNNING:
+			pass
 #	print ("is_rotating: ", is_rotating)
 	if is_rotating:
 #		print ("Where we REALLY go: ", destination)
@@ -50,7 +58,7 @@ func _physics_process(delta):
 		return
 	
 	if is_walking:
-		anim.play("Run")
+		pass
 #	
 	var destination_flat = -destination
 	# Add gravity
@@ -58,6 +66,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	if not is_rotating:
+		anim.play("Run")
 		movement()
 
 
@@ -69,3 +78,4 @@ func stop():
 func _on_timer_timeout():
 	print ("timeout!")
 	is_rotating = false
+	anim.play()
