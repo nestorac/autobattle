@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt8ilwrkqjukc"]
+[gd_scene load_steps=11 format=3 uid="uid://bt8ilwrkqjukc"]
 
 [ext_resource type="PackedScene" uid="uid://csi4if4gft0vm" path="res://warrior.tscn" id="1_pjcks"]
 [ext_resource type="Script" path="res://resources/scripts/MainScene.gd" id="1_qo713"]
 [ext_resource type="Script" path="res://resources/scripts/Camera3D.gd" id="3_rdnt0"]
+[ext_resource type="PackedScene" uid="uid://dy7qjprk5e1wx" path="res://resources/scenes/stop_area.tscn" id="4_jls3m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_evtaa"]
 
@@ -19,18 +20,18 @@ albedo_color = Color(0.223529, 0.478431, 0.231373, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2udup"]
 material = SubResource("StandardMaterial3D_hps2f")
+size = Vector3(200, 1, 200)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ayk11"]
-size = Vector3(19.8207, 0.96219, 19.926)
+size = Vector3(200, 1, 200)
 
-[node name="Node3D" type="Node3D"]
+[node name="MainScene" type="Node3D"]
 script = ExtResource("1_qo713")
 
-[node name="warrior" parent="." instance=ExtResource("1_pjcks")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.694809, 0.719195, 0, -0.719195, 0.694809, 0, 6.82154, 8.11727)
+transform = Transform3D(1, 0, 0, 0, 0.694809, 0.719195, 0, -0.719195, 0.694809, 4, 37.4592, 107.833)
 script = ExtResource("3_rdnt0")
+following_player = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.54052, -0.676637, 1.77636e-15, 0.781314, 0.624139, 0.866025, 0.31207, -0.390657, -10.0703, 0, 0)
@@ -42,10 +43,49 @@ environment = SubResource("Environment_1b5os")
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["Floor"]]
 
 [node name="floor" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_2udup")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.953135, 0)
 shape = SubResource("BoxShape3D_ayk11")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 688.0
+offset_right = 146.0
+offset_bottom = 742.0
+text = "Start"
+
+[node name="TheGoodOnes" type="Node3D" parent="."]
+
+[node name="warrior" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -98)
+
+[node name="warrior2" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 92)
+
+[node name="warrior3" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 92)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Stop Area" parent="." instance=ExtResource("4_jls3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -101)
+
+[node name="CollisionShape3D" parent="Stop Area" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03629, -2.87106, 6.939)
+
+[connection signal="pressed" from="UI/Start" to="." method="_on_start_pressed"]
+
+[editable path="Stop Area"]

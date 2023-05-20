@@ -1,8 +1,12 @@
 extends Camera3D
 
 const RAY_LENGHT = 1000
+const DISTANCE = -15
 
-@onready var warrior = $"../warrior"
+@export var mouse_click_activated = false
+@export var following_player = true
+
+@onready var warrior = $"../TheGoodOnes/warrior"
 var cube = preload("res://resources/scenes/stop_area.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -12,17 +16,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("left_click"):
+	if following_player:
+		look_at(warrior.global_position)
+		global_position = warrior.global_position - Vector3(0, -12, DISTANCE)
+	if Input.is_action_pressed("left_click") and mouse_click_activated:
 		var mouse_position = get_viewport().get_mouse_position()
-		var ray_result = ray_from_mouse(mouse_position, 9)
+		var ray_result = ray_from_mouse(mouse_position)
 		if (ray_result):
 			if ray_result.collider.is_in_group("Floor"):
 				warrior.is_walking = true
 #				warrior.set_destination(ray_result["position"])
 				place_cube(ray_result["position"])
-				print ("ray_result: ", ray_result)
+#			elif ray_result.collider.is_in_group("Troops"):
+#				warrior._state = warrior.States.ATTACKING
+##				print ("ray_result: ", ray_result)
 
-func ray_from_mouse (mouse_position, collision_mask):
+func ray_from_mouse (mouse_position):
 	var ray_start = project_ray_origin(mouse_position)
 	var ray_end = ray_start + project_ray_normal(mouse_position) * RAY_LENGHT
 	var space_state = get_world_3d().direct_space_state
@@ -41,5 +50,5 @@ func place_cube(place: Vector3):
 	warrior.set_destination(place)
 #	print ("Where we go: ", place)
 #	print("Cube instance: ", cube_instance.global_position)
-	warrior.is_rotating = true
+	warrior._state = warrior.States.ROTATING
 	warrior.timer.start(0.0)

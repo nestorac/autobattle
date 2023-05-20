@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var warrior = $warrior
+@onready var the_good_ones = $TheGoodOnes
 
 var mouse_pressed = false
 
@@ -49,3 +50,12 @@ func _process(delta):
 		# Call your function here
 		warrior.play()
 #		print ("key pressed")
+
+
+func _on_start_pressed():
+	for i in the_good_ones.get_children():
+		i.is_walking = true
+		i.set_destination(Vector3(i.global_position.x,0,-98))
+		i._state = i.States.ROTATING
+		i.timer.start(0.0)
+		print (Vector3(i.global_position.x, i.global_position.y, i.global_position.z - 100))

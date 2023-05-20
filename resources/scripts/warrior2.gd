@@ -5,7 +5,6 @@ const JUMP_VELOCITY = 4.5
 
 var destination = Vector3(0,0,0)
 var is_walking = false
-var is_rotating = false
 @onready var timer = $Timer as Timer
 @onready var anim = $AnimationPlayer as AnimationPlayer
 
@@ -36,8 +35,7 @@ func movement():
 		velocity.x = 0
 		velocity.z = 0
 
-	if not is_rotating:
-		move_and_slide()
+	move_and_slide()
 
 
 func _physics_process(delta):
@@ -45,29 +43,23 @@ func _physics_process(delta):
 		States.IDLE:
 			pass
 		States.RUNNING:
-			pass
-#	print ("is_rotating: ", is_rotating)
-	if is_rotating:
-#		print ("Where we REALLY go: ", destination)
-		# Poner un timer de 1s, y cuando termine...
-		# Investigar. Producto punto de dos vectores paralelos.
-		look_at(destination, Vector3(0,1,0))
+			anim.play("Run")
+			movement()
+		States.ROTATING:
+			look_at(destination, Vector3(0,1,0))
+		States.ATTACKING:
+			print ("attttack!!!")
+
 	
 	if not is_walking:
 		anim.stop()
+		_state = States.IDLE
 		return
-	
-	if is_walking:
-		pass
 #	
 	var destination_flat = -destination
 	# Add gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
-	if not is_rotating:
-		anim.play("Run")
-		movement()
 
 
 
@@ -77,5 +69,4 @@ func stop():
 
 func _on_timer_timeout():
 	print ("timeout!")
-	is_rotating = false
-	anim.play()
+	_state = States.RUNNING

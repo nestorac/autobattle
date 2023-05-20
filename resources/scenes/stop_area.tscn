@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://resources/scripts/stop_area.gd" id="1_oipnv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f7uvi"]
+size = Vector3(192.17, 8.13451, 11.5061)
 
 [sub_resource type="BoxMesh" id="BoxMesh_k0f7i"]
 
