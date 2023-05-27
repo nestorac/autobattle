@@ -70,3 +70,12 @@ func stop():
 func _on_timer_timeout():
 	print ("timeout!")
 	_state = States.RUNNING
+
+
+func _on_vision_area_body_entered(body):
+	if body.is_in_group("Enemy"):
+		print ("Entrando...")
+		set_destination(body.global_transform.origin)
+		_state = States.ROTATING
+		timer.start(0.0)
+#		move_and_slide()

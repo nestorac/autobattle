@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbpmh1eoh7487"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yaik1"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.75
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i1l7n"]
+
+[node name="EnemyDummy" type="CharacterBody3D" groups=["Enemy"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968444, 0)
+mesh = SubResource("CylinderMesh_yaik1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.974466, 0)
+shape = SubResource("CylinderShape3D_i1l7n")
