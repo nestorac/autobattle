@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt8ilwrkqjukc"]
+[gd_scene load_steps=12 format=3 uid="uid://bt8ilwrkqjukc"]
 
 [ext_resource type="PackedScene" uid="uid://csi4if4gft0vm" path="res://warrior.tscn" id="1_pjcks"]
 [ext_resource type="Script" path="res://resources/scripts/MainScene.gd" id="1_qo713"]
 [ext_resource type="Script" path="res://resources/scripts/Camera3D.gd" id="3_rdnt0"]
+[ext_resource type="PackedScene" uid="uid://bbpmh1eoh7487" path="res://resources/scenes/enemy.tscn" id="4_hqpsh"]
 [ext_resource type="PackedScene" uid="uid://dy7qjprk5e1wx" path="res://resources/scenes/stop_area.tscn" id="4_jls3m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_evtaa"]
@@ -29,7 +30,7 @@ size = Vector3(200, 1, 200)
 script = ExtResource("1_qo713")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.694809, 0.719195, 0, -0.719195, 0.694809, 4, 37.4592, 107.833)
+transform = Transform3D(1, 0, 0, 0, -0.00818598, 0.999967, 0, -0.999967, -0.00818598, 4, 86.1527, 31.8946)
 script = ExtResource("3_rdnt0")
 following_player = false
 
@@ -70,15 +71,18 @@ text = "Start"
 [node name="TheGoodOnes" type="Node3D" parent="."]
 
 [node name="warrior" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 88.9365)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52075, 1.36527, 41.3433)
 
 [node name="warrior2" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 92)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4792, 0.980662, 40.489)
 
 [node name="warrior3" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 92)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5208, 0.980662, 40.489)
 
 [node name="Enemies" type="Node3D" parent="."]
+
+[node name="EnemyDummy" parent="Enemies" instance=ExtResource("4_hqpsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123782, 0)
 
 [node name="Stop Area" parent="." instance=ExtResource("4_jls3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -101)
