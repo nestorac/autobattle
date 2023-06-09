@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbpmh1eoh7487"]
+[gd_scene load_steps=4 format=3 uid="uid://bbpmh1eoh7487"]
+
+[ext_resource type="Script" path="res://resources/scenes/Dummy.gd" id="1_p23af"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_yaik1"]
 top_radius = 1.0
@@ -6,8 +8,11 @@ bottom_radius = 1.0
 height = 1.75
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i1l7n"]
+height = 1.74996
+radius = 1.03873
 
-[node name="EnemyDummy" type="CharacterBody3D" groups=["Enemy"]]
+[node name="EnemyDummy" type="CharacterBody3D" groups=["Enemy", "Group2"]]
+script = ExtResource("1_p23af")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.968444, 0)

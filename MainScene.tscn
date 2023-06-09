@@ -30,7 +30,7 @@ size = Vector3(200, 1, 200)
 script = ExtResource("1_qo713")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.00818598, 0.999967, 0, -0.999967, -0.00818598, 4, 86.1527, 31.8946)
+transform = Transform3D(1, 0, 0, 0, -0.00818598, 0.999967, 0, -0.999967, -0.00818598, 4, 13.3638, 6.51948)
 script = ExtResource("3_rdnt0")
 following_player = false
 

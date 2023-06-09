@@ -48,7 +48,7 @@ func _physics_process(delta):
 		States.ROTATING:
 			look_at(destination, Vector3(0,1,0))
 		States.ATTACKING:
-			print ("attttack!!!")
+			anim.play("Attack")
 
 	
 	if not is_walking:
@@ -79,3 +79,8 @@ func _on_vision_area_body_entered(body):
 		_state = States.ROTATING
 		timer.start(0.0)
 #		move_and_slide()
+
+
+func _on_attack_area_body_entered(body):
+	if body.is_in_group("Enemy"):
+		_state = States.ATTACKING
