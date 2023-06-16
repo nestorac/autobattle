@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://mlidjrq1l2tk"]
+
+[ext_resource type="Script" path="res://resources/scripts/ui.gd" id="1_b668j"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b668j")
+
+[node name="SliderGreen" type="HSlider" parent="."]
+offset_left = 20.0
+offset_top = 597.0
+offset_right = 415.0
+offset_bottom = 648.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="SliderRed" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 599.0
+offset_top = 599.0
+offset_right = 994.0
+offset_bottom = 650.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="LabelGreen" type="Label" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 504.0
+offset_right = 216.0
+offset_bottom = 576.0
+text = "Number of green units: xxx"
+
+[node name="LabelRed" type="Label" parent="."]
+offset_left = 609.0
+offset_top = 504.0
+offset_right = 982.0
+offset_bottom = 576.0
+text = "Number of red units: xxx"
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 665.0
+offset_right = 613.0
+offset_bottom = 730.0
+text = "Play!"
+
+[connection signal="drag_ended" from="SliderGreen" to="." method="_on_slider_green_drag_ended"]
+[connection signal="drag_ended" from="SliderRed" to="." method="_on_slider_red_drag_ended"]
