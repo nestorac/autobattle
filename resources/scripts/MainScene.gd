@@ -1,9 +1,10 @@
 extends Node3D
 
 @onready var warrior = $warrior
-@onready var the_good_ones = $TheGoodOnes
 
 var mouse_pressed = false
+
+@export var the_good_ones: Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,11 +52,17 @@ func _process(delta):
 		warrior.play()
 #		print ("key pressed")
 
+func spawn_warriors(qty_of_warriors):
+	var warrior = load("res://warrior.tscn")
+	print ("¡Hola!")
+	
+	for i in qty_of_warriors:
+		var instance_warrior = warrior.instantiate()
+		the_good_ones.add_child(instance_warrior)
+		instance_warrior.is_walking = true
+		instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,-98))
+		instance_warrior._state = instance_warrior.States.ROTATING
+		instance_warrior.timer.start(0.0)
 
-func _on_start_pressed():
-	for i in the_good_ones.get_children():
-		i.is_walking = true
-		i.set_destination(Vector3(i.global_position.x,0,-98))
-		i._state = i.States.ROTATING
-		i.timer.start(0.0)
-		print (Vector3(i.global_position.x, i.global_position.y, i.global_position.z - 100))
+#	for i in the_good_ones.get_children():
+#		print (Vector3(i.global_position.x, i.global_position.y, i.global_position.z - 100))

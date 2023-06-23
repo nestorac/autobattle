@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bt8ilwrkqjukc"]
 
-[ext_resource type="PackedScene" uid="uid://csi4if4gft0vm" path="res://warrior.tscn" id="1_pjcks"]
 [ext_resource type="Script" path="res://resources/scripts/MainScene.gd" id="1_qo713"]
 [ext_resource type="Script" path="res://resources/scripts/Camera3D.gd" id="3_rdnt0"]
 [ext_resource type="PackedScene" uid="uid://bbpmh1eoh7487" path="res://resources/scenes/enemy.tscn" id="4_hqpsh"]
 [ext_resource type="PackedScene" uid="uid://dy7qjprk5e1wx" path="res://resources/scenes/stop_area.tscn" id="4_jls3m"]
+[ext_resource type="PackedScene" uid="uid://mlidjrq1l2tk" path="res://resources/scenes/ui.tscn" id="6_q5oad"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_evtaa"]
 
@@ -26,16 +26,17 @@ size = Vector3(200, 1, 200)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ayk11"]
 size = Vector3(200, 1, 200)
 
-[node name="MainScene" type="Node3D"]
+[node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones")]
 script = ExtResource("1_qo713")
+the_good_ones = NodePath("TheGoodOnes")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.00818598, 0.999967, 0, -0.999967, -0.00818598, 4, 13.3638, 6.51948)
+transform = Transform3D(1, 0, 0, 0, -0.00818598, 0.999967, 0, -0.999967, -0.00818598, 4, 75.3638, 38.2096)
 script = ExtResource("3_rdnt0")
 following_player = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.5, 0.54052, -0.676637, 1.77636e-15, 0.781314, 0.624139, 0.866025, 0.31207, -0.390657, -10.0703, 0, 0)
+transform = Transform3D(-0.5, 0.54052, -0.676637, 1.77636e-15, 0.781314, 0.624139, 0.866025, 0.312069, -0.390657, -10.0703, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -52,32 +53,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.953135, 0)
 shape = SubResource("BoxShape3D_ayk11")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Start" type="Button" parent="UI"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 688.0
-offset_right = 146.0
-offset_bottom = 742.0
-text = "Start"
-
 [node name="TheGoodOnes" type="Node3D" parent="."]
-
-[node name="warrior" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52075, 1.36527, 41.3433)
-
-[node name="warrior2" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4792, 0.980662, 40.489)
-
-[node name="warrior3" parent="TheGoodOnes" instance=ExtResource("1_pjcks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5208, 0.980662, 40.489)
 
 [node name="Enemies" type="Node3D" parent="."]
 
@@ -90,6 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -101)
 [node name="CollisionShape3D" parent="Stop Area" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03629, -2.87106, 6.939)
 
-[connection signal="pressed" from="UI/Start" to="." method="_on_start_pressed"]
+[node name="UI" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("6_q5oad")]
+main_scene = NodePath("..")
 
 [editable path="Stop Area"]

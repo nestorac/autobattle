@@ -12,6 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_b668j")
 
 [node name="SliderGreen" type="HSlider" parent="."]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 597.0
 offset_right = 415.0
@@ -39,6 +40,7 @@ offset_bottom = 576.0
 text = "Number of green units: xxx"
 
 [node name="LabelRed" type="Label" parent="."]
+layout_mode = 0
 offset_left = 609.0
 offset_top = 504.0
 offset_right = 982.0
@@ -53,5 +55,22 @@ offset_right = 613.0
 offset_bottom = 730.0
 text = "Play!"
 
+[node name="Player1Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 151.0
+offset_right = 92.0
+offset_bottom = 174.0
+text = "Player 1"
+
+[node name="Player2Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 649.0
+offset_top = 141.0
+offset_right = 723.0
+offset_bottom = 167.0
+text = "Player 2"
+
 [connection signal="drag_ended" from="SliderGreen" to="." method="_on_slider_green_drag_ended"]
 [connection signal="drag_ended" from="SliderRed" to="." method="_on_slider_red_drag_ended"]
+[connection signal="button_up" from="Play" to="." method="_on_play_button_up"]

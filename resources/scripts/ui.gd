@@ -6,6 +6,8 @@ extends Control
 @onready var slider_green = $SliderGreen
 @onready var slider_red = $SliderRed
 
+@export var main_scene: Node3D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	label_green.text = "Number of green units: " + str(slider_green.value)
@@ -23,3 +25,8 @@ func _on_slider_green_drag_ended(value_changed):
 
 func _on_slider_red_drag_ended(value_changed):
 	label_red.text =  "Number of red units: " + str(slider_red.value)
+
+
+func _on_play_button_up():
+	main_scene.spawn_warriors(slider_green.value)
+	hide()
