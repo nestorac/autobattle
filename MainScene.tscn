@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bt8ilwrkqjukc"]
+[gd_scene load_steps=13 format=3 uid="uid://bt8ilwrkqjukc"]
 
 [ext_resource type="Script" path="res://resources/scripts/MainScene.gd" id="1_qo713"]
+[ext_resource type="Texture2D" uid="uid://w463706vgtth" path="res://resources/textures/grass.jpg" id="2_tph67"]
 [ext_resource type="Script" path="res://resources/scripts/Camera3D.gd" id="3_rdnt0"]
 [ext_resource type="PackedScene" uid="uid://bbpmh1eoh7487" path="res://resources/scenes/enemy.tscn" id="4_hqpsh"]
 [ext_resource type="PackedScene" uid="uid://dy7qjprk5e1wx" path="res://resources/scenes/stop_area.tscn" id="4_jls3m"]
@@ -17,7 +18,10 @@ sky = SubResource("Sky_r2g8a")
 ambient_light_color = Color(0.196078, 0.223529, 0.780392, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hps2f"]
-albedo_color = Color(0.223529, 0.478431, 0.231373, 1)
+albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
+albedo_texture = ExtResource("2_tph67")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_2udup"]
 material = SubResource("StandardMaterial3D_hps2f")
@@ -29,11 +33,6 @@ size = Vector3(200, 1, 200)
 [node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones")]
 script = ExtResource("1_qo713")
 the_good_ones = NodePath("TheGoodOnes")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.00818598, 0.999967, 0, -0.999967, -0.00818598, 4, 75.3638, 38.2096)
-script = ExtResource("3_rdnt0")
-following_player = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.54052, -0.676637, 1.77636e-15, 0.781314, 0.624139, 0.866025, 0.312069, -0.390657, -10.0703, 0, 0)
@@ -68,5 +67,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.03629, -2.87106, 6.939)
 
 [node name="UI" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("6_q5oad")]
 main_scene = NodePath("..")
+
+[node name="CamParent" type="Node3D" parent="."]
+
+[node name="PivotCam" type="Node3D" parent="CamParent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamParent/PivotCam"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
+script = ExtResource("3_rdnt0")
+following_player = false
 
 [editable path="Stop Area"]
