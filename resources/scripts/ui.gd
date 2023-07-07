@@ -28,5 +28,6 @@ func _on_slider_red_drag_ended(value_changed):
 
 
 func _on_play_button_up():
-	main_scene.spawn_warriors(slider_green.value)
+	main_scene.spawn_warriors(slider_green.value, "GREEN")
+	main_scene.spawn_warriors(slider_red.value, "RED")
 	hide()

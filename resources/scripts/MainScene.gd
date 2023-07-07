@@ -52,18 +52,32 @@ func _process(delta):
 		warrior.play()
 #		print ("key pressed")
 
-func spawn_warriors(qty_of_warriors):
+func spawn_warriors(qty_of_warriors, team):
 	var warrior = load("res://warrior.tscn")
-	print ("¡Hola!")
 	
-	var pos = Vector3(-50,0.1,80)
+	var pos = Vector3(0,0,0)
+	
+	if team == "GREEN":
+		pos = Vector3(-50,0.1,80)
+	else:
+		pos = Vector3(-50,0.1,-80)
 	
 	for i in qty_of_warriors:
 		var instance_warrior = warrior.instantiate()
+		instance_warrior.team = team
 		the_good_ones.add_child(instance_warrior)
 		instance_warrior.transform.origin = pos
 		instance_warrior.is_walking = true
-		instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,-98))
+		if team == "GREEN":
+			var material = instance_warrior.body_mesh.get("surface_material_override/0")
+			material.albedo_color = Color.DARK_GREEN
+			instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,-98))
+			instance_warrior.body_mesh.set("surface_material_override/0", material)
+		else:
+			var material2 = instance_warrior.body_mesh.get("surface_material_override/0")
+			material2.albedo_color = Color.DARK_RED
+			instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,98))
+			instance_warrior.body_mesh.set("surface_material_override/0", material2)
 		pos = pos + Vector3(10,0,0)
 		instance_warrior._state = instance_warrior.States.ROTATING
 		instance_warrior.timer.start(0.0)

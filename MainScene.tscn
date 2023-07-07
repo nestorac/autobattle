@@ -32,7 +32,7 @@ size = Vector3(200, 1, 200)
 
 [node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones")]
 script = ExtResource("1_qo713")
-the_good_ones = NodePath("TheGoodOnes")
+the_good_ones = NodePath("GreenTeam")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.54052, -0.676637, 1.77636e-15, 0.781314, 0.624139, 0.866025, 0.312069, -0.390657, -10.0703, 0, 0)
@@ -52,11 +52,11 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.953135, 0)
 shape = SubResource("BoxShape3D_ayk11")
 
-[node name="TheGoodOnes" type="Node3D" parent="."]
+[node name="GreenTeam" type="Node3D" parent="."]
 
-[node name="Enemies" type="Node3D" parent="."]
+[node name="RedTeam" type="Node3D" parent="."]
 
-[node name="EnemyDummy" parent="Enemies" instance=ExtResource("4_hqpsh")]
+[node name="EnemyDummy" parent="RedTeam" instance=ExtResource("4_hqpsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123782, 0)
 
 [node name="Stop Area" parent="." instance=ExtResource("4_jls3m")]
