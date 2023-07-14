@@ -9,8 +9,10 @@ var is_walking = false
 @onready var anim = $AnimationPlayer as AnimationPlayer
 
 @onready var body_mesh = $Armature/Skeleton3D/BodyMesh
+@onready var damage_label = $DamageLabel
 
 @export var team = "GREEN"
+@export var life = 50
 
 enum States {IDLE, RUNNING, ROTATING, ATTACKING}
 
@@ -69,6 +71,14 @@ func _physics_process(delta):
 
 func stop():
 	is_walking = false
+
+
+func damage(_damage):
+	life -= _damage
+	print ("damage!!!")
+	damage_label.play_animation(_damage)
+	if life <= 0:
+		queue_free()
 
 
 func _on_timer_timeout():

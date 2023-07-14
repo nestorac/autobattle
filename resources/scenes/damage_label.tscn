@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5kd2yv2gewj4"]
+
+[ext_resource type="Script" path="res://resources/scripts/DamageLabel.gd" id="1_qk6wy"]
+
+[sub_resource type="Animation" id="Animation_v5s7c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.7298, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nv7cj"]
+resource_name = "damaged"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.7298, 0), Vector3(0, 2.7298, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yccx8"]
+_data = {
+"RESET": SubResource("Animation_v5s7c"),
+"damaged": SubResource("Animation_nv7cj")
+}
+
+[node name="DamageLabel" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7298, 0)
+visible = false
+billboard = 1
+text = "50"
+font_size = 65
+script = ExtResource("1_qk6wy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yccx8")
+}

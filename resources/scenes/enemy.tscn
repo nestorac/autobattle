@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbpmh1eoh7487"]
+[gd_scene load_steps=10 format=3 uid="uid://bbpmh1eoh7487"]
 
 [ext_resource type="Script" path="res://resources/scenes/Dummy.gd" id="1_p23af"]
-[ext_resource type="Script" path="res://resources/scripts/DamageLabel.gd" id="2_8ws5f"]
+[ext_resource type="PackedScene" uid="uid://c5kd2yv2gewj4" path="res://resources/scenes/damage_label.tscn" id="2_4ovar"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q66pq"]
 albedo_color = Color(0.647059, 0.407843, 0.258824, 1)
@@ -145,67 +145,6 @@ _data = {
 height = 1.74996
 radius = 1.03873
 
-[sub_resource type="Animation" id="Animation_nv7cj"]
-resource_name = "damaged"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 1.7298, 0), Vector3(0, 2.7298, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_v5s7c"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.7298, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yccx8"]
-_data = {
-"RESET": SubResource("Animation_v5s7c"),
-"damaged": SubResource("Animation_nv7cj")
-}
-
 [node name="EnemyDummy" type="CharacterBody3D" groups=["Enemy", "Group2"]]
 script = ExtResource("1_p23af")
 
@@ -306,15 +245,4 @@ libraries = {
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0, 0.974466, 0)
 shape = SubResource("CylinderShape3D_i1l7n")
 
-[node name="DamageLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7298, 0)
-visible = false
-billboard = 1
-text = "50"
-font_size = 65
-script = ExtResource("2_8ws5f")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DamageLabel"]
-libraries = {
-"": SubResource("AnimationLibrary_yccx8")
-}
+[node name="DamageLabel" parent="." instance=ExtResource("2_4ovar")]

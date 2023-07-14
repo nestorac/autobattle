@@ -6,6 +6,9 @@ var mouse_pressed = false
 
 @export var the_good_ones: Node3D
 
+var material_green = load("res://resources/materials/warrior_green.tres")
+var material_red = load("res://resources/materials/warrior_red.tres")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -69,15 +72,15 @@ func spawn_warriors(qty_of_warriors, team):
 		instance_warrior.transform.origin = pos
 		instance_warrior.is_walking = true
 		if team == "GREEN":
-			var material = instance_warrior.body_mesh.get("surface_material_override/0")
-			material.albedo_color = Color.DARK_GREEN
+#			var material = instance_warrior.body_mesh.get("surface_material_override/0")
+#			material.albedo_color = Color.DARK_GREEN
 			instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,-98))
-			instance_warrior.body_mesh.set("surface_material_override/0", material)
+			instance_warrior.body_mesh.set("surface_material_override/0", material_green)
 		else:
-			var material2 = instance_warrior.body_mesh.get("surface_material_override/0")
-			material2.albedo_color = Color.DARK_RED
+#			var material2 = instance_warrior.body_mesh.get("surface_material_override/0")
+#			material2.albedo_color = Color.DARK_RED
 			instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,98))
-			instance_warrior.body_mesh.set("surface_material_override/0", material2)
+			instance_warrior.body_mesh.set("surface_material_override/0", material_red)
 		pos = pos + Vector3(10,0,0)
 		instance_warrior._state = instance_warrior.States.ROTATING
 		instance_warrior.timer.start(0.0)
