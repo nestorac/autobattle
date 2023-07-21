@@ -45,7 +45,7 @@ func _process(delta):
 		if (ray_result):
 			if ray_result.collider.is_in_group("Floor"):
 				warrior.is_walking = true
-#				warrior.set_destination(ray_result["position"])
+				warrior.set_destination(ray_result["position"])
 				place_cube(ray_result["position"])
 #			elif ray_result.collider.is_in_group("Troops"):
 #				warrior._state = warrior.States.ATTACKING

@@ -1,12 +1,15 @@
 extends CharacterBody3D
 
-const SPEED = 1.0
+const SPEED = 0.5
 const JUMP_VELOCITY = 4.5
 
 var destination = Vector3(0,0,0)
-var move_to = Vector2(0,0)
+#var move_to = Vector3(0,0,0)
 var is_walking = false
 var moved = false
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var timer = $Timer as Timer
 @onready var anim = $AnimationPlayer as AnimationPlayer
@@ -25,11 +28,7 @@ func set_destination(_destination: Vector3):
 	destination = _destination
 
 func _ready():
-	move_to = Vector2(randi_range(-90,90), randi_range(-90,90))
-	print ("move_to:" + str(move_to))
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+	pass
 
 
 func movement():
@@ -39,9 +38,9 @@ func movement():
 
 	# Get the input direction and handle the movement/deceleration.
 	if not moved:
-		var direction = move_to
+		var direction = destination
 		velocity.x = direction.x * SPEED
-		velocity.z = direction.y * SPEED
+		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = 0
 		velocity.z = 0
@@ -50,6 +49,7 @@ func movement():
 
 
 func _physics_process(delta):
+	print ("destination: " + str(destination))
 	match _state:
 		States.IDLE:
 			pass

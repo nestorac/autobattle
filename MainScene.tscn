@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt8ilwrkqjukc"]
+[gd_scene load_steps=13 format=3 uid="uid://bt8ilwrkqjukc"]
 
 [ext_resource type="Script" path="res://resources/scripts/MainScene.gd" id="1_qo713"]
 [ext_resource type="Texture2D" uid="uid://w463706vgtth" path="res://resources/textures/grass.jpg" id="2_tph67"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bbpmh1eoh7487" path="res://resources/scenes/enemy.tscn" id="4_hqpsh"]
 [ext_resource type="PackedScene" uid="uid://dy7qjprk5e1wx" path="res://resources/scenes/stop_area.tscn" id="4_jls3m"]
 [ext_resource type="PackedScene" uid="uid://mlidjrq1l2tk" path="res://resources/scenes/ui.tscn" id="6_q5oad"]
-[ext_resource type="Script" path="res://resources/scripts/Path3D.gd" id="7_ooqsk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_evtaa"]
 
@@ -30,8 +29,6 @@ size = Vector3(200, 1, 200)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ayk11"]
 size = Vector3(200, 1, 200)
-
-[sub_resource type="Curve3D" id="Curve3D_c4poh"]
 
 [node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones")]
 script = ExtResource("1_qo713")
@@ -80,11 +77,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
 script = ExtResource("3_rdnt0")
 following_player = false
-
-[node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_c4poh")
-script = ExtResource("7_ooqsk")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 
 [editable path="Stop Area"]
