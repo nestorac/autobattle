@@ -1,7 +1,17 @@
 extends CharacterBody3D
 
-const SPEED = 0.5
+#const SPEED = 0.5
 const JUMP_VELOCITY = 4.5
+
+# STATS
+@export var team = "GREEN"
+
+@export var life = 50
+@export var speed = 10
+@export var strength = 10
+@export var attack_range = 1
+@export var defense =   20
+@export var price = 10
 
 var destination = Vector3(0,0,0)
 #var move_to = Vector3(0,0,0)
@@ -16,9 +26,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var body_mesh = $Armature/Skeleton3D/BodyMesh
 @onready var damage_label = $DamageLabel
-
-@export var team = "GREEN"
-@export var life = 50
 
 enum States {IDLE, RUNNING, ROTATING, ATTACKING}
 
@@ -39,8 +46,8 @@ func movement():
 	# Get the input direction and handle the movement/deceleration.
 	if not moved:
 		var direction = destination
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * (speed / 20.0)
+		velocity.z = direction.z * (speed / 20.0)
 	else:
 		velocity.x = 0
 		velocity.z = 0
@@ -79,7 +86,7 @@ func stop():
 
 
 func damage(_damage):
-	life -= _damage
+	life -= _damage / defense
 	print ("damage!!!")
 	damage_label.play_animation(_damage)
 	if life <= 0:
