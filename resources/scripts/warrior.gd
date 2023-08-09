@@ -6,12 +6,12 @@ const JUMP_VELOCITY = 4.5
 # STATS
 @export var team = "GREEN"
 
-@export var life = 50
-@export var speed = 10
-@export var strength = 10
-@export var attack_range = 1
-@export var defense =   20
-@export var price = 10
+@export var life = 50.0
+@export var speed = 10.0
+@export var strength = 10.0
+@export var attack_range = 1.0
+@export var defense = 20.0
+@export var price = 10.0
 
 var destination = Vector3(0,0,0)
 #var move_to = Vector3(0,0,0)
@@ -46,8 +46,8 @@ func movement():
 	# Get the input direction and handle the movement/deceleration.
 	if not moved:
 		var direction = destination
-		velocity.x = direction.x * (speed / 20.0)
-		velocity.z = direction.z * (speed / 20.0)
+		velocity.x = direction.x * (speed / 300.0)
+		velocity.z = direction.z * (speed / 300.0)
 	else:
 		velocity.x = 0
 		velocity.z = 0
@@ -86,10 +86,10 @@ func stop():
 
 
 func damage(_damage):
-	life -= _damage / defense
+	life -= ( _damage )
 	print ("damage!!!")
 	damage_label.play_animation(_damage)
-	if life <= 0:
+	if life <= 0.0:
 		queue_free()
 
 
