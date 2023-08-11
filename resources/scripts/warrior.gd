@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Unit
+
 #const SPEED = 0.5
 const JUMP_VELOCITY = 4.5
 
@@ -27,31 +29,41 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var body_mesh = $Armature/Skeleton3D/BodyMesh
 @onready var damage_label = $DamageLabel
 
+# NAVIGATION
+var movement_speed: float = 2.0
+var movement_target_position: Vector3 = Vector3(-3.0,0.0,2.0)
+
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+
+# END NAVIGATION
+
 enum States {IDLE, RUNNING, ROTATING, ATTACKING}
 
 var _state : int = States.IDLE
 
-func set_destination(_destination: Vector3):
-	destination = _destination
+#func set_destination(_destination: Vector3):
+#	destination = _destination
+
+func set_movement_target(movement_target: Vector3):
+	navigation_agent.set_target_position(movement_target)
+
 
 func _ready():
 	pass
 
 
 func movement():
-	# Handle Jump.
-#	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-#		velocity.y = JUMP_VELOCITY
+	if navigation_agent.is_navigation_finished():
+		return
 
-	# Get the input direction and handle the movement/deceleration.
-	if not moved:
-		var direction = destination
-		velocity.x = direction.x * (speed / 300.0)
-		velocity.z = direction.z * (speed / 300.0)
-	else:
-		velocity.x = 0
-		velocity.z = 0
+	var current_agent_position: Vector3 = global_position
+	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 
+	var new_velocity: Vector3 = next_path_position - current_agent_position
+	new_velocity = new_velocity.normalized()
+	new_velocity = new_velocity * movement_speed
+
+	velocity = new_velocity
 	move_and_slide()
 
 
@@ -103,7 +115,7 @@ func _on_vision_area_body_entered(body):
 		if body.team == team:
 			return
 		print ("Entrando...")
-		set_destination(body.global_transform.origin)
+		set_movement_target(body.global_transform.origin)
 		_state = States.ROTATING
 		timer.start(0.0)
 #		move_and_slide()

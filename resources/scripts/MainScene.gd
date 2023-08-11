@@ -74,12 +74,12 @@ func spawn_warriors(qty_of_warriors, team):
 		if team == "GREEN":
 #			var material = instance_warrior.body_mesh.get("surface_material_override/0")
 #			material.albedo_color = Color.DARK_GREEN
-			instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,-98))
+			instance_warrior.set_movement_target(Vector3(instance_warrior.global_position.x,0,-98))
 			instance_warrior.body_mesh.set("surface_material_override/0", material_green)
 		else:
 #			var material2 = instance_warrior.body_mesh.get("surface_material_override/0")
 #			material2.albedo_color = Color.DARK_RED
-			instance_warrior.set_destination(Vector3(instance_warrior.global_position.x,0,98))
+			instance_warrior.set_movement_target(Vector3(instance_warrior.global_position.x,0,98))
 			instance_warrior.body_mesh.set("surface_material_override/0", material_red)
 		pos = pos + Vector3(10,0,0)
 		instance_warrior._state = instance_warrior.States.ROTATING

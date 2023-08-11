@@ -45,7 +45,7 @@ func _process(delta):
 		if (ray_result):
 			if ray_result.collider.is_in_group("Floor"):
 				warrior.is_walking = true
-				warrior.set_destination(ray_result["position"])
+				warrior.set_movement_target(ray_result["position"])
 				place_cube(ray_result["position"])
 #			elif ray_result.collider.is_in_group("Troops"):
 #				warrior._state = warrior.States.ATTACKING
@@ -67,7 +67,7 @@ func place_cube(place: Vector3):
 	var cube_instance = cube.instantiate()
 	add_child(cube_instance)
 	cube_instance.global_position = place
-	warrior.set_destination(place)
+	warrior.set_movement_target(place)
 #	print ("Where we go: ", place)
 #	print("Cube instance: ", cube_instance.global_position)
 	warrior._state = warrior.States.ROTATING
