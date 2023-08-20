@@ -56,7 +56,7 @@ func _process(delta):
 #		print ("key pressed")
 
 func spawn_warriors(qty_of_warriors, team):
-	var warrior = load("res://horseman.tscn")
+	var warrior = load("res://resources/scenes/bowman.tscn")
 	
 	var pos = Vector3(0,0,0)
 	
