@@ -51,6 +51,7 @@ script = ExtResource("1_pg7nr")
 the_good_ones = NodePath("GreenTeam")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111511, 0.237715, 0.374056)
 navigation_mesh = SubResource("NavigationMesh_5gynh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" groups=["Floor"]]

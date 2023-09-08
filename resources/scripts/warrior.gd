@@ -24,7 +24,7 @@ var moved = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var timer = $Timer as Timer
-@onready var anim = $AnimationPlayer as AnimationPlayer
+@export var anim: AnimationPlayer
 
 @onready var body_mesh = $Armature/Skeleton3D/BodyMesh
 @onready var damage_label = $DamageLabel
