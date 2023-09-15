@@ -68,7 +68,7 @@ func movement():
 
 
 func _physics_process(delta):
-	print ("destination: " + str(destination))
+#	print ("destination: " + str(destination))
 	match _state:
 		States.IDLE:
 			pass

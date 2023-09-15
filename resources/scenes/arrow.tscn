@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddcsstbw2lvgk"]
+
+[ext_resource type="Script" path="res://resources/scripts/arrow.gd" id="1_7j34i"]
+[ext_resource type="Texture2D" uid="uid://c57wof52j6gq8" path="res://resources/textures/arrow.png" id="1_cc5ab"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnalg"]
+transparency = 1
+albedo_texture = ExtResource("1_cc5ab")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xhmfs"]
+material = SubResource("StandardMaterial3D_fnalg")
+size = Vector2(0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8b220"]
+size = Vector3(1.25629, 0.7046, 1.86617)
+
+[node name="Arrow" type="Area3D"]
+collision_mask = 3
+script = ExtResource("1_7j34i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_xhmfs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8b220")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

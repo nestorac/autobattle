@@ -46,7 +46,7 @@ background_mode = 2
 sky = SubResource("Sky_r2g8a")
 ambient_light_color = Color(0.196078, 0.223529, 0.780392, 1)
 
-[node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones")]
+[node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones") groups=["Level"]]
 script = ExtResource("1_pg7nr")
 the_good_ones = NodePath("GreenTeam")
 
@@ -133,6 +133,8 @@ main_scene = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamParent/PivotCam"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 21, 0)
+projection = 1
+size = 20.0
 script = ExtResource("5_1sbv5")
 following_player = false
