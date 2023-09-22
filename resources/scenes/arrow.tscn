@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c57wof52j6gq8" path="res://resources/textures/arrow.png" id="1_cc5ab"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnalg"]
-transparency = 1
+shading_mode = 0
 albedo_texture = ExtResource("1_cc5ab")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xhmfs"]
@@ -23,6 +23,7 @@ mesh = SubResource("PlaneMesh_xhmfs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_8b220")
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

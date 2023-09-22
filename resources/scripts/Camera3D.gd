@@ -29,9 +29,9 @@ func _input(event):
 	if (event.is_action("Rotate_right")):
 		pivot.rotation_degrees -= Vector3(0,1,0)
 	if (event.is_action("Zoom_in")):
-		fov +=1
+		size *= 1.1
 	if (event.is_action("Zoom_out")):
-		fov -=1
+		size *= 0.9
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
