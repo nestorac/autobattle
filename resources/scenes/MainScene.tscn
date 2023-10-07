@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bt8ilwrkqjukc"]
+[gd_scene load_steps=18 format=3 uid="uid://bt8ilwrkqjukc"]
 
 [ext_resource type="Script" path="res://resources/scripts/MainScene.gd" id="1_pg7nr"]
 [ext_resource type="Texture2D" uid="uid://w463706vgtth" path="res://resources/textures/grass.jpg" id="2_64brr"]
 [ext_resource type="PackedScene" uid="uid://bbpmh1eoh7487" path="res://resources/scenes/enemy.tscn" id="3_cjxgh"]
 [ext_resource type="PackedScene" uid="uid://mlidjrq1l2tk" path="res://resources/scenes/ui.tscn" id="4_bjyt4"]
 [ext_resource type="Script" path="res://resources/scripts/Camera3D.gd" id="5_1sbv5"]
+[ext_resource type="Script" path="res://resources/scripts/CamBody.gd" id="5_vonbi"]
 [ext_resource type="Texture2D" uid="uid://b005eqlcj8i5x" path="res://resources/textures/close-up-ground-texture-detail-medium.jpg" id="6_nlvw8"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5gynh"]
@@ -40,6 +41,8 @@ data = PackedVector3Array(-5, 5, 5, 5, 5, 5, -5, -5, 5, 5, 5, 5, 5, -5, 5, -5, -
 [sub_resource type="Environment" id="Environment_1b5os"]
 background_mode = 1
 background_color = Color(0.956863, 0.827451, 0.752941, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_heq77"]
 
 [node name="MainScene" type="Node3D" node_paths=PackedStringArray("the_good_ones") groups=["Level"]]
 script = ExtResource("1_pg7nr")
@@ -122,24 +125,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123782, 0)
 [node name="UI" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("4_bjyt4")]
 main_scene = NodePath("..")
 
-[node name="CamParent" type="Node3D" parent="."]
+[node name="CamBody" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.55526, 0)
+script = ExtResource("5_vonbi")
 
-[node name="PivotCam" type="Node3D" parent="CamParent"]
+[node name="PivotCam" type="Node3D" parent="CamBody"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CamParent/PivotCam"]
+[node name="Camera3D" type="Camera3D" parent="CamBody/PivotCam"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 21, 0)
 projection = 1
 size = 20.0
 script = ExtResource("5_1sbv5")
 following_player = false
 
-[node name="Timer" type="Timer" parent="CamParent/PivotCam/Camera3D"]
-one_shot = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CamBody"]
+shape = SubResource("BoxShape3D_heq77")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -38.6902, 0)
 pixel_size = 0.4
 texture = ExtResource("6_nlvw8")
-
-[connection signal="timeout" from="CamParent/PivotCam/Camera3D/Timer" to="CamParent/PivotCam/Camera3D" method="_on_timer_timeout"]

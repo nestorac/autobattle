@@ -1,7 +1,5 @@
 extends Node3D
 
-@onready var warrior = $warrior
-
 var mouse_pressed = false
 
 @export var the_good_ones: Node3D
@@ -49,11 +47,9 @@ func _input(event: InputEvent) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_pressed("Play"):
-		# Call your function here
-		warrior.play()
-#		print ("key pressed")
+#func _process(delta):
+#	if Input.is_action_pressed("Play"):
+#		warrior.play()
 
 func spawn_warriors(qty_of_warriors, team):
 	var warrior = load("res://resources/scenes/bowman.tscn")
